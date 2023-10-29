@@ -1,5 +1,6 @@
 import { ListItemButton, ListItemIcon } from '@mui/material';
 import { Link } from '../../interfaces';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface PropTypes {
   link: Link;
@@ -7,18 +8,23 @@ interface PropTypes {
 
 export function DashboardSidebarListItem(props: PropTypes) {
   const { Icon, link, name } = props.link;
+
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   return (
     <>
       <ListItemButton
         TouchRippleProps={{ color: 'red' }}
         onClick={() => {
-          console.log(link);
+          navigate(link);
         }}
         sx={{
           ':hover': {
             backgroundColor: '#262736',
           },
-          backgroundColor: 'transparent',
+          backgroundColor: pathname === link ? '#262736' : 'transparent',
+          borderRadius: '4px',
         }}
         className='group'
         disableRipple

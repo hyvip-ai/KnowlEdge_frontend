@@ -109,8 +109,8 @@ export function DashboardSidebarLayout(props: PropTypes) {
         sx={{
           flexGrow: 1,
           width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
-          height: `calc(100vh - 56px)`,
-          marginTop: '56px',
+          height: `calc(100vh - 64.8px)`,
+          marginTop: '64.8px',
           overflow: 'auto',
           backgroundColor: '#191A23',
         }}

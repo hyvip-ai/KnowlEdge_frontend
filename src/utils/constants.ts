@@ -27,7 +27,7 @@ export const DashboardSidebarSections: Link[] = [
   },
   {
     name: 'Chat Rooms',
-    link: `/room`,
+    link: `/chat-room`,
     Icon: Forum,
     show: true,
   },
@@ -45,7 +45,7 @@ export const DashboardSidebarSections: Link[] = [
   },
   {
     name: 'Settings',
-    link: `/setting`,
+    link: `/settings`,
     Icon: SettingsSuggest,
     show: true,
   },
