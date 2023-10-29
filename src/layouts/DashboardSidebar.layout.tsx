@@ -1,0 +1,110 @@
+import { Box, Divider, Drawer, IconButton, List, Toolbar } from '@mui/material';
+import { ReactNode, useState } from 'react';
+import { DRAWER_WIDTH, DashboardSidebarSections } from '../utils';
+import {
+  DashboardHeader,
+  DashboardSidebarListItem,
+} from '../components/common';
+import { SpaceDashboardOutlined } from '@mui/icons-material';
+
+interface PropTypes {
+  children: ReactNode;
+}
+
+export function DashboardSidebarLayout(props: PropTypes) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  return (
+    <div className='flex'>
+      <DashboardHeader handleToggleOpen={handleDrawerToggle} />
+      <Box
+        component='nav'
+        sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
+        aria-label='dashboard links'
+      >
+        <Drawer
+          variant='temporary'
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true,
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: DRAWER_WIDTH,
+              background: '#191A23',
+              borderRightColor: '#2c2d3c',
+            },
+          }}
+        >
+          <div className='px-4 py-2'>
+            <IconButton
+              color='inherit'
+              aria-label='close drawer'
+              onClick={handleDrawerToggle}
+              edge='start'
+            >
+              <SpaceDashboardOutlined className='text-primary' />
+            </IconButton>
+          </div>
+
+          <div className='px-4 py-2'>
+            <img src='/logoWithName.svg' width={160} />
+          </div>
+          <Divider />
+          <div className='px-4 py-2 flex flex-col justify-between h-screen'>
+            <div className='mt-2'>
+              <List>
+                {DashboardSidebarSections.map((item) => (
+                  <DashboardSidebarListItem key={item.name} />
+                ))}
+              </List>
+            </div>
+          </div>
+        </Drawer>
+        <Drawer
+          variant='permanent'
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: DRAWER_WIDTH,
+              background: '#191A23',
+              borderRightColor: '#2c2d3c',
+            },
+          }}
+          open
+        >
+          <div className='px-4 py-[17.5px] border-b border-border'>
+            <img src='/logoWithName.svg' width={120} />
+          </div>
+          <div className='px-4 py-2 flex flex-col justify-between h-screen'>
+            <div className='mt-2'>
+              <List>
+                {DashboardSidebarSections.map((item) => (
+                  <DashboardSidebarListItem key={item.name} />
+                ))}
+              </List>
+            </div>
+          </div>
+        </Drawer>
+      </Box>
+      <Box
+        component='main'
+        sx={{
+          flexGrow: 1,
+          width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
+        }}
+      >
+        <Toolbar />
+        {props.children}
+      </Box>
+    </div>
+  );
+}

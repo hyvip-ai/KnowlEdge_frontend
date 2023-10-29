@@ -1,10 +1,14 @@
+import { DashboardSidebarLayout } from './layouts';
+
 function App() {
   return (
-    <div className='py-10 bg-primary'>
-      <h1 className='text-3xl py-10 font-bold bg-secondary text-primary'>
-        Hello world!
-      </h1>
-    </div>
+    <DashboardSidebarLayout>
+      <div className='p-10 bg-primary'>
+        <h1 className='text-3xl p-10 font-bold bg-secondary text-primary'>
+          Hello world!
+        </h1>
+      </div>
+    </DashboardSidebarLayout>
   );
 }
 
