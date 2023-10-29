@@ -1,4 +1,10 @@
-import { Dashboard, Forum, Groups } from '@mui/icons-material';
+import {
+  Dashboard,
+  Engineering,
+  Forum,
+  Groups,
+  SettingsSuggest,
+} from '@mui/icons-material';
 import { Link } from '../interfaces';
 
 export const DRAWER_WIDTH = 280;
@@ -8,7 +14,7 @@ export const APP_BAR_DESKTOP = 92;
 export enum Roles {
   SUPER_ADMIN = 'SUPER_ADMIN',
   ADMIN = 'ADMIN',
-  MEMBER = 'MEMBER',
+  USER = 'USER',
   NONE = '',
 }
 
@@ -26,9 +32,21 @@ export const DashboardSidebarSections: Link[] = [
     show: true,
   },
   {
-    name: 'Member Management',
+    name: 'Members',
     link: `/member-management`,
     Icon: Groups,
+    show: true,
+  },
+  {
+    name: 'Profile',
+    link: `/profile`,
+    Icon: Engineering,
+    show: true,
+  },
+  {
+    name: 'Settings',
+    link: `/setting`,
+    Icon: SettingsSuggest,
     show: true,
   },
 ];

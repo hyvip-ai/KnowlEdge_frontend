@@ -20,7 +20,21 @@ export function DashboardSidebarLayout(props: PropTypes) {
 
   return (
     <div className='flex'>
-      <DashboardHeader handleToggleOpen={handleDrawerToggle} />
+      <Box
+        sx={{ display: { xs: 'block', sm: 'none' } }}
+        className='px-4 py-2 absolute z-[9999]'
+      >
+        <IconButton
+          disableRipple
+          color='inherit'
+          aria-label='close drawer'
+          onClick={handleDrawerToggle}
+          edge='start'
+        >
+          <SpaceDashboardOutlined className='text-primary' />
+        </IconButton>
+      </Box>
+      <DashboardHeader />
       <Box
         component='nav'
         sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
@@ -43,13 +57,8 @@ export function DashboardSidebarLayout(props: PropTypes) {
             },
           }}
         >
-          <div className='px-4 py-2'>
-            <IconButton
-              color='inherit'
-              aria-label='close drawer'
-              onClick={handleDrawerToggle}
-              edge='start'
-            >
+          <div className='px-4 py-2 opacity-0'>
+            <IconButton color='inherit' aria-label='close drawer' edge='start'>
               <SpaceDashboardOutlined className='text-primary' />
             </IconButton>
           </div>
@@ -81,7 +90,7 @@ export function DashboardSidebarLayout(props: PropTypes) {
           }}
           open
         >
-          <div className='px-4 py-[17.5px] pl-8 border-b border-border'>
+          <div className='px-4 py-4 pl-8 border-b border-border'>
             <img src='/logoWithName.svg' width={120} />
           </div>
           <div className='px-4 py-2 flex flex-col justify-between h-screen'>
@@ -100,8 +109,8 @@ export function DashboardSidebarLayout(props: PropTypes) {
         sx={{
           flexGrow: 1,
           width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
-          height: `100vh`,
-          marginTop: '68px',
+          height: `calc(100vh - 56px)`,
+          marginTop: '56px',
           overflow: 'auto',
           backgroundColor: '#191A23',
         }}
