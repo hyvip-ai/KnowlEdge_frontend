@@ -1,42 +1,33 @@
-import { Collapse, List, ListItemButton, ListItemIcon } from '@mui/material';
-import {
-  MailLockOutlined,
-  ExpandLess,
-  ExpandMore,
-  StarBorder,
-} from '@mui/icons-material';
-import { useState } from 'react';
+import { ListItemButton, ListItemIcon } from '@mui/material';
+import { Link } from '../../interfaces';
 
-export function DashboardSidebarListItem() {
-  const [open, setOpen] = useState(true);
+interface PropTypes {
+  link: Link;
+}
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
+export function DashboardSidebarListItem(props: PropTypes) {
+  const { Icon, link, name } = props.link;
   return (
     <>
-      <ListItemButton onClick={handleClick}>
+      <ListItemButton
+        TouchRippleProps={{ color: 'red' }}
+        onClick={() => {
+          console.log(link);
+        }}
+        sx={{
+          ':hover': {
+            backgroundColor: '#262736',
+          },
+          backgroundColor: 'transparent',
+        }}
+        className='group'
+        disableRipple
+      >
         <ListItemIcon>
-          <MailLockOutlined className='text-secondary' />
+          <Icon className='text-secondary group-hover:text-primary' />
         </ListItemIcon>
-        <p className='text-primary flex w-full'>Inbox</p>
-        {open ? (
-          <ExpandLess className='text-secondary' />
-        ) : (
-          <ExpandMore className='text-secondary' />
-        )}
+        <p className='text-primary flex w-full'>{name}</p>
       </ListItemButton>
-      <Collapse in={open} timeout='auto' unmountOnExit>
-        <List component='div' disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder className='text-secondary' />
-            </ListItemIcon>
-            <p className='text-primary'>Starred</p>
-          </ListItemButton>
-        </List>
-      </Collapse>
     </>
   );
 }

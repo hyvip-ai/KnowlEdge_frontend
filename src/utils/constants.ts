@@ -1,14 +1,5 @@
-import {
-  AutoAwesome,
-  BookmarkAdd,
-  BusinessCenter,
-  Dashboard,
-  Diversity3,
-  PersonOutline,
-  Search,
-  TurnedInNot,
-} from '@mui/icons-material';
-import { DashboardLinkSection } from '../interfaces/link.interface';
+import { Dashboard, Forum, Groups } from '@mui/icons-material';
+import { Link } from '../interfaces';
 
 export const DRAWER_WIDTH = 280;
 export const APP_BAR_MOBILE = 64;
@@ -21,73 +12,23 @@ export enum Roles {
   NONE = '',
 }
 
-export const DashboardSidebarSections: DashboardLinkSection[] = [
+export const DashboardSidebarSections: Link[] = [
   {
-    name: 'GENERAL',
-    items: [
-      {
-        name: 'Dashboard',
-        link: `/dashboard`,
-        Icon: Dashboard,
-        show: true,
-      },
-      {
-        name: 'Company Listing',
-        link: `/company-listing/list`,
-        Icon: BusinessCenter,
-        show: true,
-      },
-      {
-        name: 'Explore',
-        link: `/explore`,
-        Icon: Search,
-        show: true,
-      },
-      {
-        name: 'Alfred -SaaS',
-        link: `/alfred`,
-        Icon: AutoAwesome,
-        show: true,
-      },
-    ],
+    name: 'Dashboard',
+    link: `/dashboard`,
+    Icon: Dashboard,
+    show: true,
   },
   {
-    name: 'ACTIVITY',
-    items: [
-      {
-        name: 'Deal Room',
-        link: `/deal-room`,
-        Icon: BookmarkAdd,
-        show: true,
-        links: [],
-      },
-      {
-        name: 'Syndicate Room',
-        link: `/syndicate`,
-        Icon: Diversity3,
-        show: true,
-        disabled: true,
-        tag: 'Coming Soon',
-      },
-      {
-        name: 'Saved Profiles',
-        link: `/member/saved-profile`,
-        Icon: TurnedInNot,
-        show: true,
-        links: [],
-      },
-    ],
+    name: 'Chat Rooms',
+    link: `/room`,
+    Icon: Forum,
+    show: true,
   },
   {
-    name: 'ORGANISATION',
-    items: [
-      {
-        name: 'Member Profile',
-        link: `/member`,
-        Icon: PersonOutline,
-        show: true,
-        links: [],
-      },
-    ],
+    name: 'Member Management',
+    link: `/member-management`,
+    Icon: Groups,
+    show: true,
   },
 ];

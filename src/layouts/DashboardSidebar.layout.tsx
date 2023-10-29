@@ -1,4 +1,4 @@
-import { Box, Divider, Drawer, IconButton, List, Toolbar } from '@mui/material';
+import { Box, Divider, Drawer, IconButton, List } from '@mui/material';
 import { ReactNode, useState } from 'react';
 import { DRAWER_WIDTH, DashboardSidebarSections } from '../utils';
 import {
@@ -54,15 +54,15 @@ export function DashboardSidebarLayout(props: PropTypes) {
             </IconButton>
           </div>
 
-          <div className='px-4 py-2'>
-            <img src='/logoWithName.svg' width={160} />
+          <div className='px-4 pt-2 pb-[17.5px] pl-8 border-b border-border'>
+            <img src='/logoWithName.svg' width={120} />
           </div>
           <Divider />
           <div className='px-4 py-2 flex flex-col justify-between h-screen'>
             <div className='mt-2'>
               <List>
-                {DashboardSidebarSections.map((item) => (
-                  <DashboardSidebarListItem key={item.name} />
+                {DashboardSidebarSections.map((link) => (
+                  <DashboardSidebarListItem key={link.name} link={link} />
                 ))}
               </List>
             </div>
@@ -81,14 +81,14 @@ export function DashboardSidebarLayout(props: PropTypes) {
           }}
           open
         >
-          <div className='px-4 py-[17.5px] border-b border-border'>
+          <div className='px-4 py-[17.5px] pl-8 border-b border-border'>
             <img src='/logoWithName.svg' width={120} />
           </div>
           <div className='px-4 py-2 flex flex-col justify-between h-screen'>
             <div className='mt-2'>
               <List>
-                {DashboardSidebarSections.map((item) => (
-                  <DashboardSidebarListItem key={item.name} />
+                {DashboardSidebarSections.map((link) => (
+                  <DashboardSidebarListItem key={link.name} link={link} />
                 ))}
               </List>
             </div>
@@ -100,9 +100,12 @@ export function DashboardSidebarLayout(props: PropTypes) {
         sx={{
           flexGrow: 1,
           width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
+          height: `100vh`,
+          marginTop: '68px',
+          overflow: 'auto',
+          backgroundColor: '#191A23',
         }}
       >
-        <Toolbar />
         {props.children}
       </Box>
     </div>

@@ -35,7 +35,14 @@ export function DashboardHeader(props: PropTypes) {
         >
           <SpaceDashboardOutlined />
         </IconButton>
-        <p>Persistent drawer</p>
+        <div className='w-full flex justify-end'>
+          <img
+            src='https://api.dicebear.com/7.x/lorelei/svg?seed=member%member'
+            height={40}
+            width={40}
+            className='rounded-full bg-white cursor-pointer'
+          />
+        </div>
       </Toolbar>
     </AppBar>
   );

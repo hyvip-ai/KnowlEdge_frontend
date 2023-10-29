@@ -14,8 +14,3 @@ export interface Link {
   tag?: string;
   hideFor?: Roles[];
 }
-
-export interface DashboardLinkSection {
-  name: string;
-  items: Link[];
-}
