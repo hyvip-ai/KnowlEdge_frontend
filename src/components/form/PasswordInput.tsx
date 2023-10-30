@@ -6,6 +6,7 @@ interface PropTypes {
   control: Control<any>;
   name: string;
   label: string;
+  placeholder?: string;
   inputContainer?: string;
 }
 export function PasswordInput(props: PropTypes) {
@@ -26,10 +27,15 @@ export function PasswordInput(props: PropTypes) {
                 {props.label}
               </p>
               <input
-                className='block w-full appearance-none rounded-md border border-border px-3 py-2 text-secondary focus:outline-none bg-primary sm:text-sm border-r-0 rounded-tr-none rounded-br-none'
+                className={`block w-full appearance-none rounded-md border px-3 py-2 focus:outline-none bg-primary sm:text-sm border-r-0 rounded-tr-none rounded-br-none ${
+                  invalid
+                    ? 'border-red-500 placeholder:text-red-500 text-red-500'
+                    : 'text-secondary border-border'
+                }`}
                 type={show ? 'text' : 'password'}
                 name={props.name}
                 onChange={onChange}
+                placeholder={props.placeholder}
                 value={value}
                 autoComplete='off'
               />
@@ -38,12 +44,22 @@ export function PasswordInput(props: PropTypes) {
               onClick={() => {
                 setShow((prev) => !prev);
               }}
-              className='bg-primary h-[37.6px] flex justify-center items-center mt-[28px] border border-border border-l-0 rounded-md rounded-bl-none rounded-tl-none px-2 cursor-pointer'
+              className={`bg-primary h-[37.6px] flex justify-center items-center mt-[28px] border border-l-0 rounded-md rounded-bl-none rounded-tl-none px-2 cursor-pointer ${
+                invalid ? 'border-red-500' : 'border-border'
+              }`}
             >
               {show ? (
-                <VisibilityOff className='text-secondary hover:text-primary' />
+                <VisibilityOff
+                  className={`hover:text-primary ${
+                    invalid ? 'text-red-500' : 'text-secondary'
+                  }`}
+                />
               ) : (
-                <Visibility className='text-secondary hover:text-primary' />
+                <Visibility
+                  className={`hover:text-primary ${
+                    invalid ? 'text-red-500' : 'text-secondary'
+                  }`}
+                />
               )}
             </div>
           </div>

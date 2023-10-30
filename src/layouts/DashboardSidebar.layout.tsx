@@ -22,7 +22,7 @@ export function DashboardSidebarLayout(props: PropTypes) {
     <div className='flex'>
       <Box
         sx={{ display: { xs: 'block', sm: 'none' } }}
-        className='px-4 py-2 absolute z-[9999]'
+        className='px-4 py-2 fixed z-[9999]'
       >
         <IconButton
           disableRipple
