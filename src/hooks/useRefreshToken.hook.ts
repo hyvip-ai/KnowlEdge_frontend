@@ -1,6 +1,6 @@
 import { useAuth } from './useAuth.hook';
 import { axiosPublic } from '../api';
-import { SigninResponse } from '../models';
+import { SigninResponse } from '../model';
 import { Roles } from '../utils';
 import { useCallback } from 'react';
 

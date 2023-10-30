@@ -3,6 +3,7 @@ import { Route as RouteInterface } from '../interfaces/route.interface';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Public, RequireAuth } from '../components/authentication';
 import { FullScreenLoader, Title } from '../components/common';
+import { Roles } from '../utils';
 
 const AuthLayout = lazy(() =>
   import('../layouts/Auth.layout').then((module) => ({
@@ -34,15 +35,27 @@ const ChatRooms = lazy(() =>
   }))
 );
 
+const EditChatRoom = lazy(() =>
+  import('../pages/chatRooms/EditChatRoom').then((module) => ({
+    default: module.EditChatRoom,
+  }))
+);
+
+const Chat = lazy(() =>
+  import('../pages/chatRooms/Chat').then((module) => ({
+    default: module.Chat,
+  }))
+);
+
 const Dashboard = lazy(() =>
   import('../pages/dashboard/Dashboard').then((module) => ({
     default: module.Dashboard,
   }))
 );
 
-const Members = lazy(() =>
-  import('../pages/members/Members').then((module) => ({
-    default: module.Members,
+const Users = lazy(() =>
+  import('../pages/users/Users').then((module) => ({
+    default: module.Users,
   }))
 );
 
@@ -88,30 +101,55 @@ const RoutesData: RouteInterface[] = [
     component: Dashboard,
     layout: DashboardSidebarLayout,
     title: 'KnowlEdge | Dashboard',
+    requiredAuth: true,
+    roles: [Roles.ADMIN, Roles.USER],
   },
   {
     path: '/chat-room',
     component: ChatRooms,
     layout: DashboardSidebarLayout,
     title: 'KnowlEdge | Chat Rooms',
+    requiredAuth: true,
+    roles: [Roles.ADMIN, Roles.USER],
+  },
+  {
+    path: '/chat-room/:id/edit',
+    component: EditChatRoom,
+    layout: DashboardSidebarLayout,
+    title: 'KnowlEdge | Edit Chat Rooms',
+    requiredAuth: true,
+    roles: [Roles.ADMIN],
+  },
+  {
+    path: '/chat-room/:id',
+    component: Chat,
+    title: 'KnowlEdge | Chat',
+    requiredAuth: true,
+    roles: [Roles.ADMIN],
   },
   {
     path: '/profile',
     component: Profile,
     layout: DashboardSidebarLayout,
     title: 'KnowlEdge | Profile',
+    requiredAuth: true,
+    roles: [Roles.ADMIN, Roles.USER],
   },
   {
     path: '/settings',
     component: Settings,
     layout: DashboardSidebarLayout,
     title: 'KnowlEdge | Settings',
+    requiredAuth: true,
+    roles: [Roles.ADMIN],
   },
   {
-    path: '/member-management',
-    component: Members,
+    path: '/user-management',
+    component: Users,
     layout: DashboardSidebarLayout,
-    title: 'KnowlEdge | Members',
+    title: 'KnowlEdge | Users',
+    requiredAuth: true,
+    roles: [Roles.ADMIN],
   },
   {
     path: '/unauthorized',

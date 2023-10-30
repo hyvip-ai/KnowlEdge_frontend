@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
-import './index.css';
+import './styles/index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from './services/index.ts';
+import { AuthProvider, ModalProvider } from './services';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient({
@@ -19,10 +19,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <BrowserRouter>
-          <App />
-          <Toaster position='top-right' />
-        </BrowserRouter>
+        <ModalProvider>
+          <BrowserRouter>
+            <App />
+            <Toaster position='bottom-right' />
+          </BrowserRouter>
+        </ModalProvider>
       </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>

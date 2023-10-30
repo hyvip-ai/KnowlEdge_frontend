@@ -11,6 +11,7 @@ export default {
         border: '#2c2d3c',
         theme: '#FF4B00',
         themeHover: '#e94600',
+        themeHoverSecondary: '#eb460022',
       },
       backgroundColor: {
         primary: '#191A23',

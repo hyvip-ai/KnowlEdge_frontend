@@ -32,8 +32,8 @@ export const DashboardSidebarSections: Link[] = [
     show: true,
   },
   {
-    name: 'Members',
-    link: `/member-management`,
+    name: 'Users',
+    link: `/user-management`,
     Icon: Groups,
     show: true,
   },

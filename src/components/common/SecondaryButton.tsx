@@ -10,12 +10,12 @@ interface PropTypes {
   className?: string;
 }
 
-export function PrimaryButton(props: PropTypes) {
+export function SecondaryButton(props: PropTypes) {
   return (
     <button
       onClick={props.onClick}
       disabled={props.isDisabled}
-      className='transition-all flex w-full justify-center rounded-md border border-transparent bg-theme py-2 px-4 text-sm font-medium text-primary hover:bg-themeHover focus:outline-none disabled:opacity-70'
+      className='transition-all flex w-full justify-center rounded-md border border-theme bg-transparent py-2 px-4 text-sm font-medium text-theme hover:bg-themeHoverSecondary hover:text-primary focus:outline-none disabled:opacity-70'
     >
       {props.isLoading ? <Loader /> : props.children}
     </button>

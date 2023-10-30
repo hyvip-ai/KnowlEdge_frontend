@@ -4,9 +4,10 @@ import {
   Signin as SigninInterface,
   Signup as SignupInterface,
 } from '../interfaces';
+import { SigninResponse } from '../model';
 
 export const signup = (data: SignupInterface) =>
-  axiosPublic.post<SignupResponse>('/auth/signup', data);
+  axiosPublic.post('/auth/signup', data);
 
 export const signin = (data: SigninInterface) =>
   axiosPublic.post<SigninResponse>('/auth/signin', data, {

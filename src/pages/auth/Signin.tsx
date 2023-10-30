@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Signin as SigninInterface } from '../../interfaces';
 import { toastMessage } from '../../utils';
-import { useSignin } from '../../hooks';
+import { useAuth, useSignin } from '../../hooks';
 
 const schema = yup.object().shape({
   email: yup
@@ -30,6 +30,7 @@ const defaultValues: SigninInterface = {
 };
 
 export function Signin() {
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
@@ -40,8 +41,12 @@ export function Signin() {
 
   const onSubmit = async (formData: SigninInterface) => {
     try {
-      await mutateAsync(formData);
-      toastMessage.success('Signin up successfully');
+      const response = await mutateAsync(formData);
+      setAuth({
+        accessToken: response.data.accessToken,
+        role: response.data.role,
+      });
+      toastMessage.success('Signed in successfully');
       navigate('/dashboard');
     } catch (err) {
       toastMessage.error(err);
