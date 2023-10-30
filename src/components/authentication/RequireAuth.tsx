@@ -1,9 +1,9 @@
-import { Roles } from '../../utils';
+// import { Roles } from '../../utils';
 
-interface PropTypes {
-  allowedRoles: Roles[];
-}
+// interface PropTypes {
+//   allowedRoles: Roles[];
+// }
 
-export function RequireAuth(props: PropTypes) {
+export function RequireAuth() {
   return <div>RequireAuth</div>;
 }
