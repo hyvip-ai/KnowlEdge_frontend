@@ -1,12 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { TextInput, PasswordInput } from '../../components/form';
 import { PrimaryButton } from '../../components/common';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Signin as SigninInterface } from '../../interfaces';
 import { toastMessage } from '../../utils';
-import { useAuth, useSignin } from '../../hooks';
+import { useAuth, useRefreshToken, useSignin } from '../../hooks';
+import { useCallback, useEffect, useState } from 'react';
 
 const schema = yup.object().shape({
   email: yup
@@ -30,14 +31,19 @@ const defaultValues: SigninInterface = {
 };
 
 export function Signin() {
-  const { setAuth } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { auth, setAuth } = useAuth();
+  const refresh = useRefreshToken();
   const navigate = useNavigate();
+  const { state } = useLocation();
+
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
     defaultValues,
   });
 
-  const { mutateAsync, isLoading } = useSignin();
+  const { mutateAsync, isLoading: signinIn } = useSignin();
 
   const onSubmit = async (formData: SigninInterface) => {
     try {
@@ -47,11 +53,30 @@ export function Signin() {
         role: response.data.role,
       });
       toastMessage.success('Signed in successfully');
-      navigate('/dashboard');
+      navigate(state?.from.pathname || '/dashboard');
     } catch (err) {
       toastMessage.error(err);
     }
   };
+
+  const handleRefresh = useCallback(async () => {
+    try {
+      await refresh();
+    } catch (err) {
+      // Do Something
+    } finally {
+      setIsLoading(false);
+    }
+  }, [refresh]);
+
+  useEffect(() => {
+    if (auth.accessToken) {
+      navigate(state?.from.pathname || '/dashboard');
+    } else if (!auth.accessToken) {
+      setIsLoading(true);
+      handleRefresh();
+    }
+  }, [auth.accessToken, navigate, handleRefresh, state]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -69,7 +94,11 @@ export function Signin() {
       <div className='py-6 flex justify-end'>
         <p className='text-theme cursor-pointer'>Forgot your password?</p>
       </div>
-      <PrimaryButton isLoading={isLoading} isDisabled={isLoading} type='button'>
+      <PrimaryButton
+        isLoading={signinIn || isLoading}
+        isDisabled={signinIn || isLoading}
+        type='button'
+      >
         Sign In
       </PrimaryButton>
       <div className='pt-6 mb-8 flex gap-2 justify-center'>
