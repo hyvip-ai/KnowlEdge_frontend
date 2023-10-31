@@ -2,9 +2,9 @@ import { DashboardCustomize } from '@mui/icons-material';
 import { PrimaryButton, SecondaryButton } from '../../components/common';
 import { useModal } from '../../hooks';
 import { CreateChatRoom } from '../../components/modals';
-import { serialize, toastMessage } from '../../utils';
+import { ChatRoomStatus, serialize, toastMessage } from '../../utils';
 import { useChatRooms } from '../../hooks/chatRoom.hooks';
-import { Skeleton } from '@mui/material';
+import { Skeleton, Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 export function ChatRooms() {
@@ -59,46 +59,69 @@ export function ChatRooms() {
               <>
                 {data.data.map((chatRoom) => (
                   <div
-                    className='bg-secondary py-4 px-8 min-w-[360px] border border-border rounded'
+                    className='bg-secondary overflow-hidden relative py-6 px-8 min-w-[360px] border border-border rounded flex flex-col'
                     key={chatRoom.id}
                   >
-                    <div className='flex gap-4 items-center'>
-                      <div className='h-15 w-15 rounded-full overflow-hidden'>
-                        <img
-                          src={`https://api.dicebear.com/7.x/thumbs/svg?${serialize(
-                            { seed: chatRoom.name }
-                          )}`}
-                          alt='room-icon'
-                          height={60}
-                          width={60}
-                        />
+                    <Tooltip
+                      title={
+                        chatRoom.status === ChatRoomStatus.READY
+                          ? 'You can start chatting right away'
+                          : 'Upload files and load them to start chatting'
+                      }
+                    >
+                      <div
+                        className={`cursor-pointer absolute top-0 right-0 translate-x-[44%] translate-y-[-56%] rounded-full w-[150px] h-[150px] ${
+                          chatRoom.status === ChatRoomStatus.READY
+                            ? 'bg-green-500'
+                            : 'bg-yellow-500'
+                        }`}
+                      ></div>
+                    </Tooltip>
+                    <div>
+                      <div className='flex gap-4 items-center justify-center mb-4'>
+                        <div className='h-15 w-15 rounded-full overflow-hidden'>
+                          <img
+                            src={`https://api.dicebear.com/7.x/thumbs/svg?${serialize(
+                              { seed: chatRoom.name }
+                            )}`}
+                            alt='room-icon'
+                            height={60}
+                            width={60}
+                          />
+                        </div>
                       </div>
-                      <div>
+                      <div className='text-center'>
                         <h1 className='text-xl text-primary font-bold'>
                           {chatRoom.name}
                         </h1>
-                        {chatRoom.description ? (
-                          <p className='text-[16px] text-secondary font-medium mt-2'>
-                            {chatRoom.description}
-                          </p>
-                        ) : null}
+                        <p className='text-[16px] text-secondary font-medium mt-2'>
+                          {chatRoom.description || 'No Description Available'}
+                        </p>
                       </div>
-                    </div>
-                    <div className='mt-6 flex justify-between items-center gap-4'>
-                      <SecondaryButton
-                        type='button'
-                        onClick={() =>
-                          navigate(`/chat-room/${chatRoom.id}/edit`)
-                        }
-                      >
-                        Edit Room
-                      </SecondaryButton>
-                      <PrimaryButton
-                        type='button'
-                        onClick={() => navigate(`/chat-room/${chatRoom.id}`)}
-                      >
-                        Start Chatting
-                      </PrimaryButton>
+                      <div className='mt-6 flex justify-between items-center gap-4'>
+                        <SecondaryButton
+                          type='button'
+                          onClick={() =>
+                            navigate(`/chat-room/${chatRoom.id}/edit`)
+                          }
+                        >
+                          Edit Room
+                        </SecondaryButton>
+                        <PrimaryButton
+                          type='button'
+                          onClick={() => {
+                            if (chatRoom.status === ChatRoomStatus.READY) {
+                              navigate(`/chat-room/${chatRoom.id}`);
+                              return;
+                            }
+                            toastMessage.error(
+                              'Please upload files and load them to start chatting'
+                            );
+                          }}
+                        >
+                          Start Chatting
+                        </PrimaryButton>
+                      </div>
                     </div>
                   </div>
                 ))}

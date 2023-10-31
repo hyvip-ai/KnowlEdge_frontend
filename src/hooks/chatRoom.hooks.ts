@@ -1,6 +1,12 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import useAxiosPrivate from './useAxiosPrivate.hook';
-import { chatRoom, chatRooms, createChatRoom, editChatRoom } from '../requests';
+import {
+  chatRoom,
+  chatRooms,
+  createChatRoom,
+  editChatRoom,
+  loadFiles,
+} from '../requests';
 import { CreateChatRoom as CreateChatRoomInterface } from '../interfaces';
 
 export const useChatRooms = (enabled = true) => {
@@ -51,4 +57,12 @@ export const useEditChatRoom = () => {
       return res.data;
     }
   );
+};
+
+export const useLoadFiles = () => {
+  const axiosPrivate = useAxiosPrivate();
+  return useMutation(async (chatRoomId: string) => {
+    const res = await loadFiles(axiosPrivate, chatRoomId);
+    return res.data;
+  });
 };

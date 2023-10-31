@@ -6,3 +6,4 @@ export * from './signinResponse.model';
 export * from './chatRoomResponse.model';
 export * from './fileUploadResponse.model';
 export * from './allFilesResponse.model';
+export * from './organizationResponse.model';

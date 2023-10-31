@@ -6,3 +6,4 @@ export * from './PrimaryButton';
 export * from './SecondaryButton';
 export * from './Loader';
 export * from './File';
+export * from './Badge';

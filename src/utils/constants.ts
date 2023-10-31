@@ -18,6 +18,11 @@ export enum Roles {
   NONE = '',
 }
 
+export enum ChatRoomStatus {
+  PENDING = 'PENDING',
+  READY = 'READY',
+}
+
 export const DashboardSidebarSections: Link[] = [
   {
     name: 'Dashboard',

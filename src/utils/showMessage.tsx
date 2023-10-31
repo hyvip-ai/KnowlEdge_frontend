@@ -28,6 +28,10 @@ const option:
 export const toastMessage = {
   success: (message: string) => toast.success(message, option),
   error: (error: any) => {
+    if (typeof error === 'string') {
+      toast.error(error, option);
+      return;
+    }
     const err = (error.response?.data || error) as ErrorResponse;
     if (typeof err.message === 'string') {
       if (err.message) {

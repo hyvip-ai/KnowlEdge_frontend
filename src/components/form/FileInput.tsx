@@ -6,7 +6,11 @@ import { useUploadFile } from '../../hooks';
 import { Loader } from '../common';
 import { useQueryClient } from '@tanstack/react-query';
 
-export function FileInput() {
+interface PropTypes {
+  disabled: boolean;
+}
+
+export function FileInput(props: PropTypes) {
   const { id } = useParams();
   const fileRef = useRef<HTMLInputElement | null>(null);
 
@@ -39,10 +43,10 @@ export function FileInput() {
     <>
       <div
         className={`flex justify-center items-center bg-secondary h-[200px] w-[200px] rounded border border-border hover:shadow-lg transition-all ${
-          isLoading ? 'cursor-not-allowed' : 'cursor-pointer'
+          isLoading || props.disabled ? 'cursor-not-allowed' : 'cursor-pointer'
         }`}
         onClick={() => {
-          if (!isLoading) {
+          if (!isLoading && !props.disabled) {
             fileRef.current?.click();
           }
         }}
@@ -50,7 +54,12 @@ export function FileInput() {
         {isLoading ? (
           <Loader />
         ) : (
-          <UploadFile className='text-primary' sx={{ fontSize: '56px' }} />
+          <div className='flex flex-col justify-center items-center gap-2'>
+            <UploadFile className='text-primary' sx={{ fontSize: '56px' }} />
+            <p className='text-primary font-semibold text-[16px]'>
+              Upload File
+            </p>
+          </div>
         )}
       </div>
       <input
