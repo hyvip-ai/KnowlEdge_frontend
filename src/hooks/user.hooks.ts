@@ -1,6 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import useAxiosPrivate from './useAxiosPrivate.hook';
-import { basic } from '../requests';
+import { basic, updateBasic } from '../requests';
+import { UpdateBasic } from '../interfaces';
 
 export const useBasic = (enabled = true) => {
   const axiosPrivate = useAxiosPrivate();
@@ -14,4 +15,12 @@ export const useBasic = (enabled = true) => {
       enabled,
     }
   );
+};
+
+export const useUpdateBasic = () => {
+  const axiosPrivate = useAxiosPrivate();
+  return useMutation(async (data: Partial<UpdateBasic>) => {
+    const res = await updateBasic(axiosPrivate, data);
+    return res.data;
+  });
 };

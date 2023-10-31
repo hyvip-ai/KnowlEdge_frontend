@@ -35,7 +35,7 @@ export function ChatRooms() {
       </div>
       <div>
         {isLoading ? (
-          <div className='flex gap-4 flex-wrap justify-center items-center'>
+          <div className='flex gap-4 flex-wrap justify-center items-center mt-4'>
             {Array(10)
               .fill(0)
               .map((_item, index) => (
@@ -44,7 +44,7 @@ export function ChatRooms() {
                   className='border border-border rounded bg-secondary'
                 >
                   <Skeleton
-                    sx={{ bgcolor: '#1c1d2a' }}
+                    sx={{ bgcolor: '#ffffff15' }}
                     variant='rectangular'
                     width={210}
                     height={118}
@@ -54,11 +54,14 @@ export function ChatRooms() {
               ))}
           </div>
         ) : (
-          <div className='flex gap-4 flex-wrap items-stretch mt-6'>
+          <div className='flex gap-4 flex-wrap items-stretch mt-4'>
             {data?.data.length ? (
               <>
                 {data.data.map((chatRoom) => (
-                  <div className='bg-secondary py-4 px-8 min-w-[360px] border border-border rounded'>
+                  <div
+                    className='bg-secondary py-4 px-8 min-w-[360px] border border-border rounded'
+                    key={chatRoom.id}
+                  >
                     <div className='flex gap-4 items-center'>
                       <div className='h-15 w-15 rounded-full overflow-hidden'>
                         <img
@@ -101,7 +104,7 @@ export function ChatRooms() {
                 ))}
               </>
             ) : (
-              <h1 className='text-xl text-secondary font-bold mt-6'>
+              <h1 className='text-xl text-secondary font-bold'>
                 No Chat Rooms Found!!
               </h1>
             )}

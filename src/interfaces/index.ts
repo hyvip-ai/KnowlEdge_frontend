@@ -4,3 +4,5 @@ export * from './signup.interface';
 export * from './auth.interface';
 export * from './createChatRoom.interface';
 export * from './modalProps.interface';
+export * from './updateBasic.interface';
+export * from './organizationResponse.model';

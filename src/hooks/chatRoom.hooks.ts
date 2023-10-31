@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import useAxiosPrivate from './useAxiosPrivate.hook';
-import { chatRooms, createChatRoom } from '../requests';
+import { chatRoom, chatRooms, createChatRoom, editChatRoom } from '../requests';
 import { CreateChatRoom as CreateChatRoomInterface } from '../interfaces';
 
 export const useChatRooms = (enabled = true) => {
@@ -13,6 +13,7 @@ export const useChatRooms = (enabled = true) => {
     },
     {
       enabled,
+      retry: 1,
     }
   );
 };
@@ -23,4 +24,31 @@ export const useCreateChatRoom = () => {
     const res = await createChatRoom(axiosPrivate, data);
     return res.data;
   });
+};
+
+export const useChatRoom = (chatRoomId: string, enabled = true) => {
+  const axiosPrivate = useAxiosPrivate();
+  return useQuery(
+    ['chat-room', chatRoomId],
+    async () => {
+      const res = await chatRoom(axiosPrivate, chatRoomId);
+      return res.data;
+    },
+    {
+      enabled,
+    }
+  );
+};
+
+export const useEditChatRoom = () => {
+  const axiosPrivate = useAxiosPrivate();
+  return useMutation(
+    async (data: {
+      chatRoomId: string;
+      data: Partial<CreateChatRoomInterface>;
+    }) => {
+      const res = await editChatRoom(axiosPrivate, data.chatRoomId, data.data);
+      return res.data;
+    }
+  );
 };

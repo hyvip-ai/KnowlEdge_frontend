@@ -30,7 +30,11 @@ export function DashboardSidebarListItem(props: PropTypes) {
         disableRipple
       >
         <ListItemIcon>
-          <Icon className='text-secondary group-hover:text-primary' />
+          <Icon
+            className={`group-hover:text-primary ${
+              pathname === link ? 'text-primary' : 'text-secondary'
+            } `}
+          />
         </ListItemIcon>
         <p className='text-primary flex w-full'>{name}</p>
       </ListItemButton>

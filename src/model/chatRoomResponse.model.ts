@@ -1,7 +1,7 @@
 import { CommonResponse } from '.';
 
-export interface AllChatRoomResponse extends CommonResponse {
-  data: ChatRoom[];
+export interface ChatRoomResponse extends CommonResponse {
+  data: ChatRoom;
 }
 
 interface ChatRoom {
