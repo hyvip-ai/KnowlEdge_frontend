@@ -1,6 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import useAxiosPrivate from './useAxiosPrivate.hook';
-import { organization } from '../requests';
+import { organization, updateOrganization } from '../requests';
+import { UpdateOrganization } from '../interfaces';
 
 export const useOrganization = (enabled = true) => {
   const axiosPrivate = useAxiosPrivate();
@@ -14,4 +15,12 @@ export const useOrganization = (enabled = true) => {
       enabled,
     }
   );
+};
+
+export const useUpdateOrganization = () => {
+  const axiosPrivate = useAxiosPrivate();
+  return useMutation(async (data: UpdateOrganization) => {
+    const res = await updateOrganization(axiosPrivate, data);
+    return res.data;
+  });
 };

@@ -1,3 +1,3 @@
 export interface UpdateOrganization {
-  openAIAPiKey?: string;
+  openAIApiKey?: string;
 }
