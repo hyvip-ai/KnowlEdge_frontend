@@ -92,7 +92,12 @@ export function Signin() {
         <PasswordInput control={control} name='password' label='Password' />
       </div>
       <div className='py-6 flex justify-end'>
-        <p className='text-theme cursor-pointer'>Forgot your password?</p>
+        <p
+          className='text-theme cursor-pointer'
+          onClick={() => navigate('/auth/forgot-password')}
+        >
+          Forgot your password?
+        </p>
       </div>
       <PrimaryButton
         isLoading={signinIn || isLoading}

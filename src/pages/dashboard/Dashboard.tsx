@@ -1,3 +1,9 @@
+import { Chart } from 'react-chartjs-2';
+import { graphOptions, reactData, unEmploymentData } from '../../utils';
+import { registerables, Chart as ChartRegister } from 'chart.js';
+
+ChartRegister.register(...registerables);
+
 export function Dashboard() {
   return (
     <div className='p-4'>
@@ -9,9 +15,15 @@ export function Dashboard() {
         </h3>
         <p className='text-secondary font-medium text-[14px]'>
           But in case you want to feel like looking at dashboard here are some
-          pretty useless charts, show unemployment chart, or number of people
-          know react chart
+          pretty interesting charts to look at
         </p>
+      </div>
+      <div className='mt-6'>
+        <Chart type='line' data={unEmploymentData} options={graphOptions} />
+      </div>
+
+      <div className='mt-6'>
+        <Chart type='line' data={reactData} options={graphOptions} />
       </div>
     </div>
   );

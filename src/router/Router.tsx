@@ -29,6 +29,17 @@ const Signin = lazy(() =>
   }))
 );
 
+const ForgotPassword = lazy(() =>
+  import('../pages/auth/ForgotPassword').then((module) => ({
+    default: module.ForgotPassword,
+  }))
+);
+const ResetPassword = lazy(() =>
+  import('../pages/auth/ResetPassword').then((module) => ({
+    default: module.ResetPassword,
+  }))
+);
+
 const ChatRooms = lazy(() =>
   import('../pages/chatRooms/ChatRooms').then((module) => ({
     default: module.ChatRooms,
@@ -95,6 +106,18 @@ const RoutesData: RouteInterface[] = [
     component: Signin,
     layout: AuthLayout,
     title: 'KnowlEdge | Signin',
+  },
+  {
+    path: '/auth/forgot-password',
+    component: ForgotPassword,
+    layout: AuthLayout,
+    title: 'KnowlEdge | Forgot Password',
+  },
+  {
+    path: '/auth/reset-password',
+    component: ResetPassword,
+    layout: AuthLayout,
+    title: 'KnowlEdge | Reset Password',
   },
   {
     path: '/dashboard',

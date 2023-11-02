@@ -6,3 +6,6 @@ export * from './createChatRoom.interface';
 export * from './modalProps.interface';
 export * from './updateBasic.interface';
 export * from './updateOrganization.interface';
+export * from './forgotPassword.interface';
+export * from './setResetPassword.interface';
+export * from './inviteUser.interface';
