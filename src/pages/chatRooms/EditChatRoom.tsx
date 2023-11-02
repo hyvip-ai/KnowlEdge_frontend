@@ -133,7 +133,7 @@ export function EditChatRoom() {
         </div>
       </div>
       <div className='flex items-center mt-6 gap-4 flex-wrap'>
-        <FileInput disabled={!isLoading} />
+        <FileInput disabled={isLoading} />
         {loadingFiles ? (
           <>
             {Array(4)

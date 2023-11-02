@@ -7,6 +7,6 @@ export const useChat = () => {
   const axiosPrivate = useAxiosPrivate();
   return useMutation(async (data: ChatRequest) => {
     const res = await chat(axiosPrivate, data);
-    return res;
+    return res.data;
   });
 };

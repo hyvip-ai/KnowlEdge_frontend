@@ -8,3 +8,4 @@ export * from './fileUploadResponse.model';
 export * from './allFilesResponse.model';
 export * from './organizationResponse.model';
 export * from './allUsersResponse.model';
+export * from './chatResponse.model';

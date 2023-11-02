@@ -8,3 +8,4 @@ export * from './Loader';
 export * from './File';
 export * from './Badge';
 export * from './ChatLoader';
+export * from './ChatBubble';
