@@ -1,8 +1,8 @@
 import { DashboardCustomize } from '@mui/icons-material';
 import { PrimaryButton, SecondaryButton } from '../../components/common';
-import { useModal } from '../../hooks';
+import { useAuth, useModal } from '../../hooks';
 import { CreateChatRoom } from '../../components/modals';
-import { ChatRoomStatus, serialize, toastMessage } from '../../utils';
+import { ChatRoomStatus, Roles, serialize, toastMessage } from '../../utils';
 import { useChatRooms } from '../../hooks/chatRoom.hooks';
 import { Skeleton, Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 export function ChatRooms() {
   const modal = useModal();
   const navigate = useNavigate();
+
+  const { auth } = useAuth();
 
   const { data, isLoading } = useChatRooms();
 
@@ -24,14 +26,16 @@ export function ChatRooms() {
     <div className='p-4'>
       <div className='flex justify-between items-center'>
         <h1 className='text-2xl text-primary font-bold '>Chat Rooms</h1>
-        <div>
-          <PrimaryButton type='button' onClick={handleCreateChatRoom}>
-            <div className='flex items-center justify-between'>
-              <DashboardCustomize fontSize='small' className='mr-1' />
-              Add New
-            </div>
-          </PrimaryButton>
-        </div>
+        {auth.role === Roles.ADMIN ? (
+          <div>
+            <PrimaryButton type='button' onClick={handleCreateChatRoom}>
+              <div className='flex items-center justify-between'>
+                <DashboardCustomize fontSize='small' className='mr-1' />
+                Add New
+              </div>
+            </PrimaryButton>
+          </div>
+        ) : null}
       </div>
       <div>
         {isLoading ? (
@@ -99,14 +103,16 @@ export function ChatRooms() {
                         </p>
                       </div>
                       <div className='mt-6 flex justify-between items-center gap-4'>
-                        <SecondaryButton
-                          type='button'
-                          onClick={() =>
-                            navigate(`/chat-room/${chatRoom.id}/edit`)
-                          }
-                        >
-                          Edit Room
-                        </SecondaryButton>
+                        {auth.role === Roles.ADMIN ? (
+                          <SecondaryButton
+                            type='button'
+                            onClick={() =>
+                              navigate(`/chat-room/${chatRoom.id}/edit`)
+                            }
+                          >
+                            Edit Room
+                          </SecondaryButton>
+                        ) : null}
                         <PrimaryButton
                           type='button'
                           onClick={() => {

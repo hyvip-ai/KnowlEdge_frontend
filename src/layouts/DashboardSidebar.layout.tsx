@@ -6,6 +6,7 @@ import {
   DashboardSidebarListItem,
 } from '../components/common';
 import { SpaceDashboardOutlined } from '@mui/icons-material';
+import { useAuth } from '../hooks';
 
 interface PropTypes {
   children: ReactNode;
@@ -13,6 +14,8 @@ interface PropTypes {
 
 export function DashboardSidebarLayout(props: PropTypes) {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const { auth } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -96,7 +99,9 @@ export function DashboardSidebarLayout(props: PropTypes) {
           <div className='px-4 py-2 flex flex-col justify-between h-screen'>
             <div className='mt-2'>
               <List>
-                {DashboardSidebarSections.map((link) => (
+                {DashboardSidebarSections.filter((link) =>
+                  link.hideFor ? !link.hideFor.includes(auth.role) : true
+                ).map((link) => (
                   <DashboardSidebarListItem key={link.name} link={link} />
                 ))}
               </List>

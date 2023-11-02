@@ -9,3 +9,6 @@ export * from './updateOrganization.interface';
 export * from './forgotPassword.interface';
 export * from './setResetPassword.interface';
 export * from './inviteUser.interface';
+export * from './SetBasic.interface';
+export * from './chatRequest.interface';
+export * from './message.interface';

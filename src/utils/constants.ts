@@ -29,31 +29,28 @@ export const DashboardSidebarSections: Link[] = [
     name: 'Dashboard',
     link: `/dashboard`,
     Icon: Dashboard,
-    show: true,
   },
   {
     name: 'Chat Rooms',
     link: `/chat-room`,
     Icon: Forum,
-    show: true,
   },
   {
     name: 'Users',
     link: `/user-management`,
     Icon: Groups,
-    show: true,
+    hideFor: [Roles.USER],
   },
   {
     name: 'Profile',
     link: `/profile`,
     Icon: Engineering,
-    show: true,
   },
   {
     name: 'Settings',
     link: `/settings`,
     Icon: SettingsSuggest,
-    show: true,
+    hideFor: [Roles.USER],
   },
 ];
 

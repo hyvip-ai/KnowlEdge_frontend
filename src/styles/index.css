@@ -70,3 +70,40 @@ input:-webkit-autofill:active {
     transition: #191A23 5000s ease-in-out 0s;
     box-shadow: inset 0 0 20px 20px #191A23;
 }
+
+
+.MuiTab-root.Mui-selected {
+    color: #FF4B00 !important;
+}
+
+.dot-elastic {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #FF4B00;
+    color: #FF4B00;
+    animation: dot-elastic 1s infinite linear;
+}
+
+@keyframes dot-elastic {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    25% {
+        transform: scale(1, 1);
+    }
+
+    50% {
+        transform: scale(1, 1.5);
+    }
+
+    75% {
+        transform: scale(1, 1);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
+}

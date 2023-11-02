@@ -8,7 +8,6 @@ export interface Link {
   Icon: OverridableComponent<SvgIconTypeMap<object, 'svg'>> & {
     muiName: string;
   };
-  show: boolean;
   disabled?: boolean;
   links?: Link[];
   tag?: string;

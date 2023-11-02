@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { AllUsersResponse, BasicResponse } from '../model';
-import { InviteUser, UpdateBasic } from '../interfaces';
+import { InviteUser, SetBasicWithToken, UpdateBasic } from '../interfaces';
 
 export const basic = (axiosPrivate: AxiosInstance) =>
   axiosPrivate.get<BasicResponse>(`/user/me`);
@@ -15,3 +15,8 @@ export const inviteUsers = (axiosPrivate: AxiosInstance, data: InviteUser) =>
 
 export const allUsers = (axiosPrivate: AxiosInstance) =>
   axiosPrivate.get<AllUsersResponse>(`/user/all`);
+
+export const setBasic = (
+  axiosPrivate: AxiosInstance,
+  data: SetBasicWithToken
+) => axiosPrivate.patch(`/user/set-basic`, data);

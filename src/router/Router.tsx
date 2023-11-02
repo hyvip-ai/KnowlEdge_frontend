@@ -34,9 +34,16 @@ const ForgotPassword = lazy(() =>
     default: module.ForgotPassword,
   }))
 );
+
 const ResetPassword = lazy(() =>
   import('../pages/auth/ResetPassword').then((module) => ({
     default: module.ResetPassword,
+  }))
+);
+
+const AcceptInvite = lazy(() =>
+  import('../pages/auth/AcceptInvite').then((module) => ({
+    default: module.AcceptInvite,
   }))
 );
 
@@ -120,6 +127,12 @@ const RoutesData: RouteInterface[] = [
     title: 'KnowlEdge | Reset Password',
   },
   {
+    path: '/auth/accept-invite',
+    component: AcceptInvite,
+    layout: AuthLayout,
+    title: 'KnowlEdge | Accept Invite',
+  },
+  {
     path: '/dashboard',
     component: Dashboard,
     layout: DashboardSidebarLayout,
@@ -148,7 +161,7 @@ const RoutesData: RouteInterface[] = [
     component: Chat,
     title: 'KnowlEdge | Chat',
     requiredAuth: true,
-    roles: [Roles.ADMIN],
+    roles: [Roles.ADMIN, Roles.USER],
   },
   {
     path: '/profile',

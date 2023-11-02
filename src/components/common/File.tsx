@@ -12,6 +12,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 interface PropTypes {
   file: { name: string; id: string };
+  hideDelete?: boolean;
 }
 
 export function File(props: PropTypes) {
@@ -54,19 +55,21 @@ export function File(props: PropTypes) {
           </h1>
         </div>
         <div className='mt-4 flex justify-center items-center gap-4'>
-          <Tooltip title='Delete the file'>
-            <button
-              onClick={() => handleDeleteFile(props.file.name)}
-              disabled={deletingFile}
-              className='p-2 rounded-full border border-border bg-primary flex justify-center items-center'
-            >
-              {deletingFile ? (
-                <Loader />
-              ) : (
-                <DeleteOutline className='text-primary' fontSize='small' />
-              )}
-            </button>
-          </Tooltip>
+          {props.hideDelete ? null : (
+            <Tooltip title='Delete the file'>
+              <button
+                onClick={() => handleDeleteFile(props.file.name)}
+                disabled={deletingFile}
+                className='p-2 rounded-full border border-border bg-primary flex justify-center items-center'
+              >
+                {deletingFile ? (
+                  <Loader />
+                ) : (
+                  <DeleteOutline className='text-primary' fontSize='small' />
+                )}
+              </button>
+            </Tooltip>
+          )}
           <Tooltip title='Open the file in new tab'>
             <button
               disabled={gettingSignedURL}

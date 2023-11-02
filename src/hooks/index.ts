@@ -7,3 +7,4 @@ export * from './useModal.hook';
 export * from './chatRoom.hooks';
 export * from './file.hooks';
 export * from './organization.hooks';
+export * from './chat.hooks';

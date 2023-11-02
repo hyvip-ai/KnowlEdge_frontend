@@ -3,9 +3,10 @@ import { Control, Controller } from 'react-hook-form';
 interface PropTypes {
   control: Control<any>;
   name: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   disabled?: boolean;
+  className?: string;
 }
 
 export function TextInput(props: PropTypes) {
@@ -17,13 +18,15 @@ export function TextInput(props: PropTypes) {
         field: { onChange, value },
         fieldState: { invalid, error },
       }) => (
-        <div className={``}>
+        <div className={`${props.className ? props.className : ''}`}>
           <label>
-            <p className='block text-sm font-medium text-primary mb-2'>
-              {props.label}
-            </p>
+            {props.label ? (
+              <p className='block text-sm font-medium text-primary mb-2'>
+                {props.label}
+              </p>
+            ) : null}
             <input
-              className={`block w-full appearance-none rounded-md border px-3 py-2 focus:outline-none bg-primary sm:text-sm ${
+              className={`block w-full h-full appearance-none rounded-md border px-3 py-2 focus:outline-none bg-primary sm:text-sm ${
                 invalid
                   ? 'border-red-500 placeholder:text-red-500 text-red-500'
                   : 'border-border text-secondary'

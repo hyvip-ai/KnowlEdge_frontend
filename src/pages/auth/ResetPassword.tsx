@@ -42,7 +42,6 @@ export function ResetPassword() {
 
   const onSubmit = async (data: SetResetPassword) => {
     try {
-      console.log(data);
       const token = searchParams.get('token');
       if (token) {
         await mutateAsync({
