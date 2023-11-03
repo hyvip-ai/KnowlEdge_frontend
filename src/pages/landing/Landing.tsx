@@ -1,4 +1,4 @@
-import { ArrowForwardRounded, ArrowRight } from '@mui/icons-material';
+import { ArrowForwardRounded } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
 export function Landing() {
