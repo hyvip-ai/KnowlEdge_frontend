@@ -1,6 +1,6 @@
 import { Fragment, Suspense, lazy } from 'react';
 import { Route as RouteInterface } from '../interfaces/route.interface';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Public, RequireAuth } from '../components/authentication';
 import { FullScreenLoader, Title } from '../components/common';
 import { Roles } from '../utils';
@@ -14,6 +14,12 @@ const AuthLayout = lazy(() =>
 const DashboardSidebarLayout = lazy(() =>
   import('../layouts/DashboardSidebar.layout').then((module) => ({
     default: module.DashboardSidebarLayout,
+  }))
+);
+
+const Landing = lazy(() =>
+  import('../pages/landing/Landing').then((module) => ({
+    default: module.Landing,
   }))
 );
 
@@ -102,6 +108,11 @@ const Unauthorized = lazy(() =>
 );
 
 const RoutesData: RouteInterface[] = [
+  {
+    path: '/',
+    component: Landing,
+    title: 'KnowlEdge',
+  },
   {
     path: '/auth/signup',
     component: Signup,
@@ -202,7 +213,6 @@ const RoutesData: RouteInterface[] = [
 export function Router() {
   return (
     <Routes>
-      <Route path='/' element={<Navigate to='/dashboard' replace />} />
       <Route path='/'>
         {RoutesData.map((route) => {
           const Guard = route.requiredAuth ? (

@@ -30,11 +30,9 @@ export function Files() {
         </>
       ) : (
         <>
-          {allfiles?.data
-            .filter((file) => file.name !== '.emptyFolderPlaceholder')
-            .map((file) => (
-              <File file={file} key={file.id} hideDelete />
-            ))}
+          {allfiles?.data.map((file) => (
+            <File file={file} key={file.id} hideDelete />
+          ))}
         </>
       )}
     </div>

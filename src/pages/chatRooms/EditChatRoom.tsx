@@ -123,11 +123,9 @@ export function EditChatRoom() {
           </>
         ) : (
           <>
-            {files?.data
-              .filter((file) => file.name !== '.emptyFolderPlaceholder')
-              .map((file) => (
-                <File file={file} key={file.id} />
-              ))}
+            {files?.data.map((file) => (
+              <File file={file} key={file.id} />
+            ))}
           </>
         )}
       </div>
