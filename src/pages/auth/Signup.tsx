@@ -112,13 +112,15 @@ export function Signup() {
           </p>
         </div>
       </form>
-      <div className='absolute bottom-0 left-0 right-0 !cursor-default pointer-events-none'>
-        <Lottie
-          options={defaultOptions}
-          style={{ width: '70%', cursor: 'default' }}
-          isClickToPauseDisabled
-        />
-      </div>
+      {playLottie ? (
+        <div className='absolute bottom-0 left-0 right-0 !cursor-default pointer-events-none'>
+          <Lottie
+            options={defaultOptions}
+            style={{ width: '70%', cursor: 'default' }}
+            isClickToPauseDisabled
+          />
+        </div>
+      ) : null}
     </>
   );
 }
