@@ -74,15 +74,8 @@ export function ChatArea() {
     }
   }, [id, startChat]);
 
-  const handleEndChatSession = () => {
-    console.log('Handle end Chat Room');
-  };
-
   useEffect(() => {
     handleStartChatSession();
-    return () => {
-      handleEndChatSession();
-    };
   }, [handleStartChatSession]);
 
   useEffect(() => {

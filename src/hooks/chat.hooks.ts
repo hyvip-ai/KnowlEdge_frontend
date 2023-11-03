@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import useAxiosPrivate from './useAxiosPrivate.hook';
-import { chat, startChat, endChat } from '../requests';
+import { chat, startChat } from '../requests';
 import { ChatRequestWithHistory } from '../interfaces';
 
 export const useChat = () => {
@@ -17,14 +17,6 @@ export const useStartChat = () => {
   const axiosPrivate = useAxiosPrivate();
   return useMutation(async (chatRoomId: string) => {
     const res = await startChat(axiosPrivate, chatRoomId);
-    return res.data;
-  });
-};
-
-export const useEndChat = () => {
-  const axiosPrivate = useAxiosPrivate();
-  return useMutation(async (chatRoomId: string) => {
-    const res = await endChat(axiosPrivate, chatRoomId);
     return res.data;
   });
 };

@@ -10,6 +10,3 @@ export const chat = (
 
 export const startChat = (axiosPrivate: AxiosInstance, chatRoomId: string) =>
   axiosPrivate.post<ChatResponse>(`/chat/${chatRoomId}/start`);
-
-export const endChat = (axiosPrivate: AxiosInstance, chatRoomId: string) =>
-  axiosPrivate.post<ChatResponse>(`/chat/${chatRoomId}/end`);
