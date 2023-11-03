@@ -70,7 +70,7 @@ export function Signup() {
       reset();
       setTimeout(() => {
         navigate(`/auth/signin`);
-      }, 1500);
+      }, 2500);
     } catch (err) {
       toastMessage.error(err);
     }

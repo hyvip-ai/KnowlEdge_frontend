@@ -7,6 +7,7 @@ interface PropTypes {
   placeholder?: string;
   disabled?: boolean;
   className?: string;
+  hideError?: boolean;
 }
 
 export function TextInput(props: PropTypes) {
@@ -40,7 +41,7 @@ export function TextInput(props: PropTypes) {
               autoComplete='off'
             />
           </label>
-          {invalid ? (
+          {invalid && !props.hideError ? (
             <p className='text-red-500 text-[12px] py-1'>*{error?.message}</p>
           ) : null}
         </div>

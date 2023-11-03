@@ -21,6 +21,7 @@ const option:
     color: '#F2F2F2',
     padding: '8px 24px',
     borderRadius: '10px',
+    lineBreak: 'anywhere',
   },
   duration: 3000,
 };

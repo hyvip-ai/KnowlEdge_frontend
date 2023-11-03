@@ -7,7 +7,7 @@ import { Loader } from '../common';
 import { useQueryClient } from '@tanstack/react-query';
 
 interface PropTypes {
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export function FileInput(props: PropTypes) {
@@ -24,12 +24,25 @@ export function FileInput(props: PropTypes) {
       return;
     }
 
+    if (file.type !== 'application/pdf') {
+      toastMessage.error('Only pdf files are supported now');
+      return;
+    }
+
+    const fileSIzeMB = Number((file.size / (1024 * 1024)).toFixed(2));
+
+    if (fileSIzeMB > 5) {
+      toastMessage.error('Not allowed to update file with size more than 5 MB');
+      return;
+    }
+
     const fd = new FormData();
     fd.append('file', file);
 
     try {
       await mutateAsync({ data: fd, chatRoomId: id! });
       queryClient.invalidateQueries(['files-by-chat-room', id]);
+      queryClient.invalidateQueries(['chat-room', id]);
       toastMessage.success('File uploaded successfully');
     } catch (err) {
       toastMessage.error(err);

@@ -18,6 +18,3 @@ export const editChatRoom = (
   chatRoomId: string,
   data: Partial<CreateChatRoomInterface>
 ) => axiosPrivate.patch(`/chat-room/${chatRoomId}`, data);
-
-export const loadFiles = (axiosPrivate: AxiosInstance, chatRoomId: string) =>
-  axiosPrivate.post(`/chat-room/${chatRoomId}/load`);

@@ -84,7 +84,7 @@ export function Settings() {
             isDisabled={isFetching || isLoading}
             isLoading={isFetching || isLoading}
           >
-            Edit ChatRoom
+            Update Settings
           </PrimaryButton>
         </div>
       </form>

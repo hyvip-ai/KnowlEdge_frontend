@@ -45,32 +45,43 @@ export function DashboardHeader() {
       }}
     >
       <Toolbar>
-        <div className='w-full flex justify-end'>
-          <Popover>
-            <Popover.Button className='outline-none '>
+        <div className='w-full flex justify-end gap-4 items-center'>
+          <div>
+            <a href='https://www.buymeacoffee.com/rm2932002' target='_blank'>
               <img
-                src={`https://api.dicebear.com/7.x/lorelei-neutral/svg?${seed}`}
-                height={40}
-                width={40}
-                className='rounded-full bg-white cursor-pointer'
+                src='https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png'
+                alt='Buy Me A Coffee'
+                className='h-10 w-[150px]'
               />
-            </Popover.Button>
-            <Popover.Panel className='absolute z-10 bg-secondary rounded-lg p-4 right-4 top-[102%] w-56 flex flex-col items-center border border-border'>
-              <p className='mb-4'>
-                Hello, <b>Rajat Mondal</b>
-              </p>
-              <SecondaryButton
-                isLoading={isLoading}
-                isDisabled={isLoading}
-                type='button'
-                onClick={handleSignout}
-              >
-                <div className='flex items-center justify-center gap-1'>
-                  Signout <Logout fontSize='small' />
-                </div>
-              </SecondaryButton>
-            </Popover.Panel>
-          </Popover>
+            </a>
+          </div>
+          <div>
+            <Popover className='h-10'>
+              <Popover.Button className='outline-none '>
+                <img
+                  src={`https://api.dicebear.com/7.x/lorelei-neutral/svg?${seed}`}
+                  height={40}
+                  width={40}
+                  className='rounded-full bg-white cursor-pointer'
+                />
+              </Popover.Button>
+              <Popover.Panel className='absolute z-10 bg-secondary rounded-lg p-4 right-4 top-[102%] w-56 flex flex-col items-center border border-border'>
+                <p className='mb-4'>
+                  Hello, <b>Rajat Mondal</b>
+                </p>
+                <SecondaryButton
+                  isLoading={isLoading}
+                  isDisabled={isLoading}
+                  type='button'
+                  onClick={handleSignout}
+                >
+                  <div className='flex items-center justify-center gap-1'>
+                    Signout <Logout fontSize='small' />
+                  </div>
+                </SecondaryButton>
+              </Popover.Panel>
+            </Popover>
+          </div>
         </div>
       </Toolbar>
     </AppBar>

@@ -38,7 +38,7 @@ export function ChatBubble({ message, name }: PropTypes) {
           <p>{message.role === 'user' ? 'User' : 'KnowlEdge Bot'}</p>
         </div>
         <div>
-          <p>{`${message.content}`}</p>
+          <p className='whitespace-pre-line'>{`${message.content}`}</p>
         </div>
         {message.context ? (
           <div className='mt-3'>

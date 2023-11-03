@@ -36,6 +36,7 @@ export function File(props: PropTypes) {
     try {
       await deleteFile({ fileName, chatRoomId: id! });
       queryClient.invalidateQueries(['files-by-chat-room', id]);
+      queryClient.invalidateQueries(['chat-room', id]);
       toastMessage.success('File deleted successfully');
     } catch (err) {
       toastMessage.error(err);

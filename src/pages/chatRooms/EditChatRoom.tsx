@@ -3,24 +3,14 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { CreateChatRoom as CreateChatRoomInterface } from '../../interfaces';
 import { FileInput, TextAreaInput, TextInput } from '../../components/form';
-import {
-  Badge,
-  File,
-  PrimaryButton,
-  SecondaryButton,
-} from '../../components/common';
-import {
-  useChatRoom,
-  useEditChatRoom,
-  useFilesByChatRoom,
-  useLoadFiles,
-} from '../../hooks';
+import { Badge, File, PrimaryButton } from '../../components/common';
+import { useChatRoom, useEditChatRoom, useFilesByChatRoom } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { ChatRoomStatus, removeEmptyValues, toastMessage } from '../../utils';
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Divider, Skeleton, Tooltip } from '@mui/material';
-import { Cached, InfoOutlined } from '@mui/icons-material';
+import { InfoOutlined } from '@mui/icons-material';
 
 const schema = yup.object().shape({
   name: yup.string().trim().required('Room name is required').defined(),
@@ -47,7 +37,6 @@ export function EditChatRoom() {
     id!,
     !!id
   );
-  const { mutateAsync: loadFiles, isLoading } = useLoadFiles();
 
   const onSubmit = async (formData: CreateChatRoomInterface) => {
     try {
@@ -55,16 +44,6 @@ export function EditChatRoom() {
       await mutateAsync({ data: payload, chatRoomId: id! });
       queryClient.invalidateQueries(['chat-room', id]);
       toastMessage.success('Chat Room updated successfully');
-    } catch (err) {
-      toastMessage.error(err);
-    }
-  };
-
-  const handleLoadFiles = async () => {
-    try {
-      await loadFiles(id!);
-      queryClient.invalidateQueries(['chat-room', id]);
-      toastMessage.success('File loaded successfully');
     } catch (err) {
       toastMessage.error(err);
     }
@@ -120,20 +99,9 @@ export function EditChatRoom() {
             <InfoOutlined className='text-secondary cursor-pointer' />
           </Tooltip>
         </div>
-        <div className='w-[136px]'>
-          <SecondaryButton
-            type='button'
-            onClick={handleLoadFiles}
-            isLoading={isLoading}
-            isDisabled={isLoading}
-            className='flex items-center justify-center'
-          >
-            Load Files <Cached fontSize='small' className='ml-1' />
-          </SecondaryButton>
-        </div>
       </div>
       <div className='flex items-center mt-6 gap-4 flex-wrap'>
-        <FileInput disabled={isLoading} />
+        <FileInput />
         {loadingFiles ? (
           <>
             {Array(4)
