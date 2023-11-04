@@ -67,7 +67,7 @@ export function DashboardHeader() {
               </Popover.Button>
               <Popover.Panel className='absolute z-10 bg-secondary rounded-lg p-4 right-4 top-[102%] w-56 flex flex-col items-center border border-border'>
                 <p className='mb-4'>
-                  Hello, <b>Rajat Mondal</b>
+                  Hello, <b>{data?.data.name || 'User'}</b>
                 </p>
                 <SecondaryButton
                   isLoading={isLoading}
