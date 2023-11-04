@@ -28,14 +28,14 @@ export function Landing() {
           </button>
         </div>
       </header>
-      <div className='hero pt-28 px-4 h-screen'>
+      <div className='hero pt-28 px-4 h-screen flex justify-center items-center'>
         <div className='pt-12 px-4'>
-          <h1 className='text-primary text-[80px] font-semibold leading-[1] text-center'>
-            KnowlEdge: Answers for Your Questions, Instantly!!
+          <h1 className='text-primary text-[32px] sm:text-[40px] md:text-[70px] font-semibold leading-[1] text-center'>
+            Effortless PDF Data Extraction <br /> with KnowlEdge
           </h1>
-          <h3 className='text-secondary text-[24px] font-medium leading-[1] text-center mt-10'>
-            Unleash the Power of Instant Wisdom – Your Source for Empowering
-            Insights and Answers.
+          <h3 className='text-secondary text-[16px] sm:text-[18px] md:text-[24px] font-medium leading-[1] text-center mt-3 sm:mt-5 md:mt-10'>
+            Meet the New Generation Data Extraction Tool for Everyone, Chat
+            Seamlessly Across Multiple Files!
           </h3>
 
           <button
